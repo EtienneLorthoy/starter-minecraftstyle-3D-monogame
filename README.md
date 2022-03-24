@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-   <a>Minecraft Style Word - Starter Project</a>
+   <a>Minecraft Style World - Starter Project</a>
   <br>
 </h1>
 
