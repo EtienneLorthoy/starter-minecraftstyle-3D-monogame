@@ -9,7 +9,7 @@ namespace StarterMinecraftStyleWorld
         public ref Matrix View => ref view;
         public Matrix Projection { get; protected set; }
         public EffectPass DefaultCameraEffectPass => effect.CurrentTechnique.Passes[0];
-        
+
         private Matrix view;
 
         private Vector3 cameraPosition;
@@ -19,6 +19,8 @@ namespace StarterMinecraftStyleWorld
 
         private int captivePositionX;
         private int captivePositionY;
+        private MouseState lastMouseState;
+        private bool mouseCaptive;
 
         private BasicEffect effect;
 
@@ -51,6 +53,11 @@ namespace StarterMinecraftStyleWorld
             effect.Projection = (Game as StarterGame).Camera.Projection;
             effect.LightingEnabled = false;
 
+            // Mouse
+            lastMouseState = Mouse.GetState();
+            mouseCaptive = true;
+            this.Game.IsMouseVisible = false;
+
             base.Initialize();
         }
 
@@ -67,16 +74,29 @@ namespace StarterMinecraftStyleWorld
             if (Keyboard.GetState().IsKeyDown(Keys.Q)) cameraPosition += Vector3.Cross(cameraUp, cameraDirection) * speed;
             if (Keyboard.GetState().IsKeyDown(Keys.D)) cameraPosition -= Vector3.Cross(cameraUp, cameraDirection) * speed;
 
-            // Rotation in the world
-            cameraDirection = Vector3.Transform(cameraDirection, Matrix.CreateFromAxisAngle(cameraUp, (-MathHelper.PiOver4 / 150) * (Mouse.GetState().X - captivePositionX)));
-            cameraDirection = Vector3.Transform(cameraDirection, Matrix.CreateFromAxisAngle(Vector3.Cross(cameraUp, cameraDirection), (MathHelper.PiOver4 / 100) * (Mouse.GetState().Y - captivePositionY)));
+            // Mouse logic captive/free
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed 
+                && lastMouseState.LeftButton == ButtonState.Released)
+            {
+                Mouse.SetPosition(captivePositionX, captivePositionY);
+                this.mouseCaptive = !this.mouseCaptive;
+                this.Game.IsMouseVisible = !this.Game.IsMouseVisible;
+            }
+            lastMouseState = Mouse.GetState();
 
-            if (this.Game.IsActive) Mouse.SetPosition(captivePositionX, captivePositionY);
+            // Update Camera
+            if (this.Game.IsActive && this.mouseCaptive)
+            {
+                // Rotation in the world
+                cameraDirection = Vector3.Transform(cameraDirection, Matrix.CreateFromAxisAngle(cameraUp, (-MathHelper.PiOver4 / 150) * (Mouse.GetState().X - captivePositionX)));
+                cameraDirection = Vector3.Transform(cameraDirection, Matrix.CreateFromAxisAngle(Vector3.Cross(cameraUp, cameraDirection), (MathHelper.PiOver4 / 100) * (Mouse.GetState().Y - captivePositionY)));
 
-            cameraTarget = cameraPosition + cameraDirection;
+                Mouse.SetPosition(captivePositionX, captivePositionY);
 
-            Matrix.CreateLookAt(ref cameraPosition, ref cameraTarget, ref cameraUp, out view);
-            effect.View = view;
+                cameraTarget = cameraPosition + cameraDirection;
+                Matrix.CreateLookAt(ref cameraPosition, ref cameraTarget, ref cameraUp, out view);
+                effect.View = view;
+            }
 
             base.Update(gameTime);
         }
