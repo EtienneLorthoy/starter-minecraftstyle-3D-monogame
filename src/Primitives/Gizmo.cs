@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarterMinecraftStyleWorld.Primitives
 {
-    internal class Gizmo : DrawableGameComponent
+    public class Gizmo : DrawableGameComponent
     {
         VertexPositionColor[] vertices;
         VertexBuffer buffer;

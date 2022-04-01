@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarterMinecraftStyleWorld.Primitives
 {
-    internal class VisualVector3 : DrawableGameComponent
+    public class VisualVector3 : DrawableGameComponent
     {
         VertexPositionColor[] vertices;
         VertexBuffer buffer;

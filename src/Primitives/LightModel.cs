@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StarterMinecraftStyleWorld.Primitives
 {
-    internal class LightModel : DrawableGameComponent
+    public class LightModel : DrawableGameComponent
     {
         private static BasicEffect effect;
         private Model model;

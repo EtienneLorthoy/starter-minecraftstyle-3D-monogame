@@ -13,14 +13,13 @@ namespace StarterMinecraftStyleWorld
         private GraphicsDeviceManager _graphics;
         private Model model;
 
-        internal BasicCamera Camera;
-        internal DebugOverlay DebugOverlay;
+        public BasicCamera Camera;
+        public DebugOverlay DebugOverlay;
 
         public StarterGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             this.Window.AllowUserResizing = true;
-            this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
 
             _graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(graphics_PreparingDeviceSettings);

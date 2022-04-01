@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarterMinecraftStyleWorld.Primitives
 {
-    internal class BlockMesh : DrawableGameComponent
+    public class BlockMesh : DrawableGameComponent
     {
         private static readonly float SpriteSize = 1 / 16f;
         private static readonly float offsetX = SpriteSize * 2;

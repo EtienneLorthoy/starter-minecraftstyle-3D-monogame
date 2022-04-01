@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarterMinecraftStyleWorld.Primitives
 {
-    internal class PrimitiveFloor : DrawableGameComponent
+    public class PrimitiveFloor : DrawableGameComponent
     {
         VertexPositionColor[] vertices;
 

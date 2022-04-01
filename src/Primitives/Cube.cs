@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarterMinecraftStyleWorld.Primitives
 {
-    internal class Cube : DrawableGameComponent
+    public class Cube : DrawableGameComponent
     {
         // Triangle indices
         static int[] indices = new int[]{
