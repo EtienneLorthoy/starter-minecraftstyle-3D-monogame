@@ -6,6 +6,7 @@ namespace StarterMinecraftStyleWorld
 {
     public class BasicCamera : GameComponent
     {
+        public Vector3 Position => cameraPosition;
         public ref Matrix View => ref view;
         public Matrix Projection { get; protected set; }
         public EffectPass DefaultCameraEffectPass => effect.CurrentTechnique.Passes[0];

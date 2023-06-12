@@ -51,6 +51,7 @@ namespace StarterMinecraftStyleWorld
             // World Entities
             this.Components.Add(new PrimitiveFloor(this));
             this.Components.Add(new Gizmo(this));
+            this.Components.Add(new SkyBox(this));
             this.Components.Add(new World(this));
 
             this.Components.Add(new LightModel(this));
